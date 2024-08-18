@@ -13,16 +13,16 @@ export class Person_PhoneNumber extends $.Struct {
     id: "af663da31c027e0e",
     size: new $.ObjectSize(8, 1)
   };
-  getNumber() {
+  get number() {
     return $.Struct.getText(0, this);
   }
-  setNumber(value) {
+  set number(value) {
     $.Struct.setText(0, value, this);
   }
-  getType() {
+  get type() {
     return $.Struct.getUint16(0, this);
   }
-  setType(value) {
+  set type(value) {
     $.Struct.setUint16(0, value, this);
   }
   toString() {
@@ -48,35 +48,35 @@ export class Person_Employment extends $.Struct {
   isUnemployed() {
     return $.Struct.getUint16(4, this) === 0;
   }
-  setUnemployed() {
+  set unemployed(_) {
     $.Struct.setUint16(4, 0, this);
   }
-  getEmployer() {
+  get employer() {
     $.Struct.testWhich("employer", $.Struct.getUint16(4, this), 1, this);
     return $.Struct.getText(3, this);
   }
   isEmployer() {
     return $.Struct.getUint16(4, this) === 1;
   }
-  setEmployer(value) {
+  set employer(value) {
     $.Struct.setUint16(4, 1, this);
     $.Struct.setText(3, value, this);
   }
-  getSchool() {
+  get school() {
     $.Struct.testWhich("school", $.Struct.getUint16(4, this), 2, this);
     return $.Struct.getText(3, this);
   }
   isSchool() {
     return $.Struct.getUint16(4, this) === 2;
   }
-  setSchool(value) {
+  set school(value) {
     $.Struct.setUint16(4, 2, this);
     $.Struct.setText(3, value, this);
   }
   isSelfEmployed() {
     return $.Struct.getUint16(4, this) === 3;
   }
-  setSelfEmployed() {
+  set selfEmployed(_) {
     $.Struct.setUint16(4, 3, this);
   }
   toString() {
@@ -94,31 +94,31 @@ export class Person extends $.Struct {
     size: new $.ObjectSize(8, 4)
   };
   static _Phones;
-  getId() {
+  get id() {
     return $.Struct.getUint32(0, this);
   }
-  setId(value) {
+  set id(value) {
     $.Struct.setUint32(0, value, this);
   }
-  getName() {
+  get name() {
     return $.Struct.getText(0, this);
   }
-  setName(value) {
+  set name(value) {
     $.Struct.setText(0, value, this);
   }
-  getEmail() {
+  get email() {
     return $.Struct.getText(1, this);
   }
-  setEmail(value) {
+  set email(value) {
     $.Struct.setText(1, value, this);
   }
   adoptPhones(value) {
     $.Struct.adopt(value, $.Struct.getPointer(2, this));
   }
   disownPhones() {
-    return $.Struct.disown(this.getPhones());
+    return $.Struct.disown(this.phones);
   }
-  getPhones() {
+  get phones() {
     return $.Struct.getList(2, Person._Phones, this);
   }
   hasPhones() {
@@ -127,10 +127,10 @@ export class Person extends $.Struct {
   initPhones(length) {
     return $.Struct.initList(2, Person._Phones, length, this);
   }
-  setPhones(value) {
+  set phones(value) {
     $.Struct.copyFrom(value, $.Struct.getPointer(2, this));
   }
-  getEmployment() {
+  get employment() {
     return $.Struct.getAs(Person_Employment, this);
   }
   initEmployment() {
@@ -151,9 +151,9 @@ export class AddressBook extends $.Struct {
     $.Struct.adopt(value, $.Struct.getPointer(0, this));
   }
   disownPeople() {
-    return $.Struct.disown(this.getPeople());
+    return $.Struct.disown(this.people);
   }
-  getPeople() {
+  get people() {
     return $.Struct.getList(0, AddressBook._People, this);
   }
   hasPeople() {
@@ -162,7 +162,7 @@ export class AddressBook extends $.Struct {
   initPeople(length) {
     return $.Struct.initList(0, AddressBook._People, length, this);
   }
-  setPeople(value) {
+  set people(value) {
     $.Struct.copyFrom(value, $.Struct.getPointer(0, this));
   }
   toString() {
