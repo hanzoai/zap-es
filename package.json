@@ -52,7 +52,7 @@
     "profile:node": "node --cpu-prof --import jiti/register ./test/bench/profile.ts",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
     "test": "pnpm lint && vitest run --coverage && pnpm test:types",
-    "test:types": "tsc --noEmit --skipLibCheck"
+    "test:types": "node_modules/tsgo/bin/tsc --noEmit --skipLibCheck --incremental false"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
@@ -70,13 +70,14 @@
     "mitata": "^1.0.34",
     "prettier": "^3.8.3",
     "protobufjs": "^8.3.0",
-    "typescript": "^5.9.3",
+    "tsgo": "npm:typescript@7.0.2",
+    "typescript": "6.0.3",
     "unbuild": "^3.6.1",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.6"
   },
   "peerDependencies": {
-    "typescript": "^5.7.3"
+    "typescript": ">=5.7.3"
   },
   "peerDependenciesMeta": {
     "typescript": {
